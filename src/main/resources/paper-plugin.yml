@@ -1,0 +1,4 @@
+name: nLifeSteal
+version: '${project.version}'
+main: dev.nh3.nlifesteal.NLifeSteal
+api-version: '1.20'

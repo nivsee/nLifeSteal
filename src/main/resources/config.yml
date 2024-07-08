@@ -1,0 +1,100 @@
+#############################
+#          PLAYER           #
+#############################
+
+# Hearts - Amount of hearts, that player starts with. || (integer)
+# Lost on death - Amount of hearts, that player loses on death (and amount of hearts that attacker gains after its death) || (integer)
+# Hearts limit - Limit of hearts, that player can have. || (integer)
+
+player:
+  hearts: 10
+  lost-on-death: 1
+  hearts-limit: 30
+
+
+##################################
+#           HEART ITEM           #
+##################################
+
+# Material - Material used for heart item. || (material)
+# CMD - Custom Model Data - Used to create heart item texture. || (integer)
+# Added on consume - Default value of hearts added on consume || (integer)
+# Name - Display name of heart itemstack || (string)
+# Lore - Lore of a heart itemstack || (arraylist of strings)
+
+# EFFECTS:
+#  (https://docs.advntr.dev/sound.html)
+# - Sound enabled - Should consume sound be enabled? || (boolean (true, false))
+# - Sound - Sound name || (string)
+# - Sound source - Source of sound || (string)
+# - Volume || (double)
+# - Pitch || (double)
+
+# PLACEHOLDERS:
+# %hearts% - Amount of hearts added on consume
+
+heart:
+  material: RED_DYE
+  cmd: 1 # Custom Model ID
+  added-on-consume: 1
+  name: "&cHeart"
+  lore:
+    - ""
+    - "&cAdds %hearts%❤, click RMB to consume it..."
+  effects:
+    sound-enabled: true
+    sound: "entity.camel.eat"
+    sound-source: "PLAYER"
+    volume: 1.0
+    pitch: 1.0
+
+########################################
+#           COMMANDS ON DEATH          #
+########################################
+
+# Commands that will be executed after player loses all of its hearts
+
+# PLACEHOLDERS:
+# %player% - player name
+# %player_uuid% - player UUID
+
+commands-on-death:
+  - "tempban %player% 1d &cYou lost all of your hearts!"
+
+##############################
+#          MESSAGES          #
+##############################
+
+# Success:
+# - Reloaded - Reloaded plugin config.
+# - Consumed - Consumed the heart.
+# - Get hearts - Added hearts to command sender inventory.
+# - Set hearts - Successfully set player hearts.
+# - Withdrawn - Player successfully withdrawn hearts.
+
+# Error:
+# - Heart limit - Can't consume heart because player is at heart limit
+# - Killer inventory full - Killer was at heart limit and had full inventory.
+# - Full inventory - Player inventory is full (when withdrawing/getting hearts).
+# - Invalid amount - Invalid heart amount to withdraw.
+# - Insufficient hearts - Player doesn't have enough hearts to withdraw.
+
+# Info:
+# - Heart limit - Killer was at heart limit but had empty slot in his inventory.
+# - Check hears -
+messages:
+  success:
+    reload: "&aSuccessfully reloaded the config!"
+    consumed: "&aYou consumed a heart item, and got %hearts%❤" # PLACEHOLDERS: %hearts% - amount of hearts added to players hearts
+    withdrawn: "&aSuccessfully withdrawn heart(s)!"
+    get-hearts: "&aAdded heart(s) to the inventory."
+    set-hearts: "&aSuccessfully set %player% hearts to %hearts%" # PLACEHOLDERS: %player% - player name, %hearts% - hearts
+  error:
+    heart-limit: "&cYou can't consume hearts, because you are at heart limit!"
+    full-inventory: "&cYour inventory is full!"
+    invalid-amount: "&cInvalid heart amount!"
+    insufficient-hearts: "&cYou don't have enough hearts to do this!"
+    killer-inventory-full: "&cYou didn't get a heart because you are at heart limit and inventory was full!"
+  info:
+    heart-limit: "&cYou are at heart limit, the heart was placed into your inventory instead..."
+    check-hearts: "&fPlayer &6%player% &fhas &c%hearts%❤" # PLACEHOLDERS: %player% - player name, %hearts% - heart mound
