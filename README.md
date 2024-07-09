@@ -1,0 +1,3 @@
+# nLifeSteal
+
+Basic lifesteal plugin.
